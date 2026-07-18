@@ -1,0 +1,264 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "2026-07-18-autoapply-design.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "2026-07-18-autoapply-design.md"
+    },
+    {
+      "label": "AutoApply \u2014 Design Spec",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "autoapply \u2014 design spec"
+    },
+    {
+      "label": "Problem",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_problem",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "problem"
+    },
+    {
+      "label": "Goal",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_goal",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "goal"
+    },
+    {
+      "label": "Scope (v1)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_scope_v1",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "scope (v1)"
+    },
+    {
+      "label": "Out of scope for v1",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_out_of_scope_for_v1",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "out of scope for v1"
+    },
+    {
+      "label": "Architecture",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_architecture",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "architecture"
+    },
+    {
+      "label": "Data model",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_data_model",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "data model"
+    },
+    {
+      "label": "Field matching",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L104",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_field_matching",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "field matching"
+    },
+    {
+      "label": "Fill flow",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_fill_flow",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "fill flow"
+    },
+    {
+      "label": "Error handling",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L138",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_error_handling",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "error handling"
+    },
+    {
+      "label": "Testing",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L147",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_18_autoapply_design_testing",
+      "community": 0,
+      "community_name": "AutoApply \u2014 Design Spec",
+      "norm_label": "testing"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_architecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_data_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_error_handling",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_field_matching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_fill_flow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_goal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_out_of_scope_for_v1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_problem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_scope_v1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-18-autoapply-design.md",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_07_18_autoapply_design_autoapply_design_spec",
+      "target": "docs_superpowers_specs_2026_07_18_autoapply_design_testing",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "1a03e0a25cefef0c1bc6e02b9a9665f38252ad9a"
+}

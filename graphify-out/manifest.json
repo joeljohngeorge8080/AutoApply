@@ -1,0 +1,172 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1784397752.8997722,
+    "ast_hash": "2ae053500ae3bc8f47318904b85fb282",
+    "semantic_hash": ""
+  },
+  ".vscode/settings.json": {
+    "mtime": 1784394968.8208196,
+    "ast_hash": "39bdcc7400744e0368cb1fb159176bbd",
+    "semantic_hash": ""
+  },
+  "skills-lock.json": {
+    "mtime": 1784398115.874897,
+    "ast_hash": "f2e638f6e51f93a39ee42e6d8cbe80c7",
+    "semantic_hash": ""
+  },
+  ".claude/CLAUDE.md": {
+    "mtime": 1784397752.899454,
+    "ast_hash": "9b31786b637be3c13978bec4c2330752",
+    "semantic_hash": ""
+  },
+  ".claude/skills/claude-handoff/SKILL.md": {
+    "mtime": 1784398115.8615987,
+    "ast_hash": "6c855abc75dc7db46c3a3be739a44816",
+    "semantic_hash": ""
+  },
+  ".claude/skills/claude-handoff/agents/openai.yaml": {
+    "mtime": 1784398115.861685,
+    "ast_hash": "287633bcd295c8e9b54a5b4871168004",
+    "semantic_hash": ""
+  },
+  ".claude/skills/code-review/SKILL.md": {
+    "mtime": 1784398115.859531,
+    "ast_hash": "6dd105e464896f4964c3844f5a53f341",
+    "semantic_hash": ""
+  },
+  ".claude/skills/code-review/agents/openai.yaml": {
+    "mtime": 1784398115.8596482,
+    "ast_hash": "41726fb93a74bbeab2f643a27d6452d2",
+    "semantic_hash": ""
+  },
+  ".claude/skills/codex-build/SKILL.md": {
+    "mtime": 1784398480.7800357,
+    "ast_hash": "897f36f51ff1dd9ba169c5821cadc976",
+    "semantic_hash": ""
+  },
+  ".claude/skills/codex-review/SKILL.md": {
+    "mtime": 1784398480.780101,
+    "ast_hash": "e5d548edb839cf5d59674c5d3c62a6a3",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/SKILL.md": {
+    "mtime": 1784397752.8992934,
+    "ast_hash": "f8d5ef667aae74129e01fcca97bbfddd",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/add-watch.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "d59d027fe449f06aa03905a01184e779",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/exports.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "9da2a2152e60a22f07f05fed5158f287",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/extraction-spec.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "42fef56a01698118f7fd722acdadea34",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/github-and-merge.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "cde13df085e4c492aeb7ba298a996d0d",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/hooks.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "3f545db6ce646650bb9de588f5512a27",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/query.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "3c46f8ad006874260614ed8657d02307",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/transcribe.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "67b6a5fa6c0974e18f60db9f8932fbd8",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/update.md": {
+    "mtime": 1784397746.6076696,
+    "ast_hash": "c698309979460d0f02ba616417844399",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-me-codex/SKILL.md": {
+    "mtime": 1784398480.780144,
+    "ast_hash": "d7809c0e6cf9e4e4f09d2429e4c91f02",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-me-codex/THIRD-PARTY-NOTICES.md": {
+    "mtime": 1784398480.7801764,
+    "ast_hash": "a02d8dbd271af90249da220da02af573",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-me/SKILL.md": {
+    "mtime": 1784398115.8632627,
+    "ast_hash": "d07c47e3f0ffefd2c28354eb81a1e831",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-me/agents/openai.yaml": {
+    "mtime": 1784398115.8633294,
+    "ast_hash": "aff7b6f7b10220e3b4537c42a2d08917",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-with-docs-codex/ADR-FORMAT.md": {
+    "mtime": 1784398480.7802062,
+    "ast_hash": "bb327bab674f400796f64b6e2ef5850c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-with-docs-codex/CONTEXT-FORMAT.md": {
+    "mtime": 1784398480.780233,
+    "ast_hash": "c2f41ffc931955b2b8d01322273d75fa",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-with-docs-codex/SKILL.md": {
+    "mtime": 1784398480.7802553,
+    "ast_hash": "0fa43ca43d29d597f30336813f30c57c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-with-docs-codex/THIRD-PARTY-NOTICES.md": {
+    "mtime": 1784398480.7802815,
+    "ast_hash": "cac549298951081741a8ee62561df71d",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-with-docs/SKILL.md": {
+    "mtime": 1784398115.860806,
+    "ast_hash": "7c5095d1b2c2ed9483df63c4622d05ea",
+    "semantic_hash": ""
+  },
+  ".claude/skills/grill-with-docs/agents/openai.yaml": {
+    "mtime": 1784398115.860888,
+    "ast_hash": "d50e6a6a53801a48192dde963945affc",
+    "semantic_hash": ""
+  },
+  ".claude/skills/obsidian-vault/SKILL.md": {
+    "mtime": 1784398115.8624659,
+    "ast_hash": "f3ee46c0225a2db3cf792c8a279a9295",
+    "semantic_hash": ""
+  },
+  ".claude/skills/obsidian-vault/agents/openai.yaml": {
+    "mtime": 1784398115.862545,
+    "ast_hash": "ae8c838270263d18406b736c266eba54",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1784397752.8996353,
+    "ast_hash": "82efb97a359f5c7290bf2513d14686be",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1784397749.1077104,
+    "ast_hash": "b6a3ff24d07366f0a5b60150df0a02c4",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-07-18-autoapply-design.md": {
+    "mtime": 1784397330.9329028,
+    "ast_hash": "acc947c54de80e6829bb8661004d8ada",
+    "semantic_hash": ""
+  }
+}
