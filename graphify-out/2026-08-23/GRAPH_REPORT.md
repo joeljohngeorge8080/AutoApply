@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 306 nodes · 335 edges · 36 communities (27 shown, 9 thin omitted)
+- 306 nodes · 343 edges · 35 communities (26 shown, 9 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `157e0b75`
+- Built from commit: `8409e3b9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,11 +72,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (36 total, 9 thin omitted)
+## Communities (35 total, 9 thin omitted)
 
 ### Community 0 - "AutoApply — Design Spec"
-Cohesion: 0.17
-Nodes (23): SAMPLE_PROFILE, deleteProfile(), getProfile(), listProfiles(), readProfiles(), saveProfile(), FakeChromeStorage, writeProfiles() (+15 more)
+Cohesion: 0.19
+Nodes (21): deleteProfile(), getProfile(), listProfiles(), readProfiles(), saveProfile(), FakeChromeStorage, writeProfiles(), app (+13 more)
 
 ### Community 1 - "Wiki Index"
 Cohesion: 0.08
@@ -87,8 +87,8 @@ Cohesion: 0.08
 Nodes (23): chrome, DOM, ES2020, src, vite.config.ts, vite.content.config.ts, vitest.config.ts, vitest/globals (+15 more)
 
 ### Community 3 - "Log"
-Cohesion: 0.16
-Nodes (20): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+12 more)
+Cohesion: 0.14
+Nodes (22): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+14 more)
 
 ### Community 4 - "_index.md"
 Cohesion: 0.09
@@ -155,7 +155,7 @@ Cohesion: 0.50
 Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphify reference: incremental update and cluster-only
 
 ## Knowledge Gaps
-- **181 isolated node(s):** `MatchConfidence`, `FieldMatch`, `FUZZY_ENTRIES`, `SIGNAL_PRIORITY`, `supabase` (+176 more)
+- **180 isolated node(s):** `MatchConfidence`, `FieldMatch`, `FUZZY_ENTRIES`, `SIGNAL_PRIORITY`, `supabase` (+175 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -164,15 +164,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Grill-with-Docs-Codex — Grill Against Your Domain, Then Get Reviewed` connect `_index.md` to `ADR Format`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `Profile` connect `AutoApply — Design Spec` to `Log`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+- **Why does `Profile` connect `Log` to `AutoApply — Design Spec`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `MatchConfidence`, `FieldMatch`, `FUZZY_ENTRIES` to the rest of the system?**
-  _181 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _180 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Wiki Index` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Recent Context` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Log` be split into smaller, more focused modules?**
+  _Cohesion score 0.13756613756613756 - nodes in this community are weakly interconnected._
 - **Should `_index.md` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
-- **Should `_index.md` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
