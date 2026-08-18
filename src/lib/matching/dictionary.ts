@@ -8,6 +8,7 @@ export type CanonicalField =
   | "firstName"
   | "lastName"
   | "fullName"
+  | "initials"
   | "dateOfBirth"
   | "age"
   | "gender"
@@ -18,17 +19,21 @@ export type CanonicalField =
   | "addressState"
   | "addressZip"
   | "addressCountry"
+  | "fullAddress"
   | "school"
   | "degree"
   | "fieldOfStudy"
   | "gpa"
   | "educationStartDate"
   | "educationEndDate"
+  | "graduationMonthYear"
   | "employer"
   | "jobTitle"
   | "workStartDate"
+  | "workStartMonthYear"
   | "workEndDate"
-  | "workDescription";
+  | "workDescription"
+  | "yearsOfExperience";
 
 /**
  * Canonical field -> known label/placeholder/name variants, already in
@@ -39,6 +44,7 @@ export const DICTIONARY: Record<CanonicalField, string[]> = {
   firstName: ["first name", "firstname", "given name", "forename", "your first name", "applicant first name", "first"],
   lastName: ["last name", "lastname", "surname", "family name", "your last name", "applicant last name", "last"],
   fullName: ["full name", "fullname", "applicant name", "your name", "full legal name", "complete name"],
+  initials: ["initials", "first and last initials", "name initials", "your initials"],
   dateOfBirth: ["date of birth", "dateofbirth", "dob", "birth date", "birthdate", "date of birth", "when were you born"],
   age: ["age", "your age"],
   gender: ["gender", "sex", "select gender", "what is your gender"],
@@ -49,15 +55,19 @@ export const DICTIONARY: Record<CanonicalField, string[]> = {
   addressState: ["state", "province", "region", "state province"],
   addressZip: ["zip", "zip code", "postal code", "postcode", "zip postal"],
   addressCountry: ["country", "country name"],
+  fullAddress: ["full address", "complete address", "mailing address", "full mailing address"],
   school: ["school", "university", "college", "institution", "school name", "education institution", "university name", "college name"],
   degree: ["degree", "degree type", "qualification", "degree obtained", "degree name"],
   fieldOfStudy: ["field of study", "major", "fieldofstudy", "area of study", "major minor", "subject area", "program", "course"],
   gpa: ["gpa", "grade point average", "grade average", "cumulative gpa"],
   educationStartDate: ["education start date", "start date", "attendance start", "enrollment date", "start of studies", "when did you start"],
   educationEndDate: ["education end date", "end date", "graduation date", "attendance end", "graduation", "when did you graduate"],
+  graduationMonthYear: ["graduation month year", "graduation month and year", "grad month year", "graduation date"],
   employer: ["employer", "company", "company name", "current employer", "previous employer", "organization", "employer name", "where do you work"],
   jobTitle: ["job title", "title", "position", "role", "position title", "current position", "job function", "position held"],
   workStartDate: ["employment start date", "job start date", "work start date", "employment began", "start of employment"],
+  workStartMonthYear: ["employment month year", "start month year", "employment start month year"],
   workEndDate: ["employment end date", "job end date", "work end date", "employment ended", "end of employment"],
   workDescription: ["job description", "responsibilities", "description", "duties", "work description", "summary of responsibilities"],
+  yearsOfExperience: ["years of experience", "years exp", "experience", "years employed", "total experience"],
 };
