@@ -1,6 +1,6 @@
 import type { Profile } from "../storage/types";
 import { DICTIONARY, type CanonicalField } from "./dictionary";
-import { ageFromDob, fullNameFromParts } from "./transforms";
+import { ageFromDob, fullNameFromParts, initialsFromName, yearsOfExperience, fullAddress, monthYearFromDate } from "./transforms";
 
 /** Raw text signals extracted for one form field, before normalization. */
 export interface FieldSignal {
@@ -122,6 +122,9 @@ function resolveValue(field: CanonicalField, profile: Profile): string | undefin
     case "fullName":
       raw = fullNameFromParts(profile.personal.firstName, profile.personal.lastName);
       break;
+    case "initials":
+      raw = initialsFromName(profile.personal.firstName, profile.personal.lastName);
+      break;
     case "dateOfBirth":
       raw = profile.personal.dateOfBirth;
       break;
@@ -152,6 +155,9 @@ function resolveValue(field: CanonicalField, profile: Profile): string | undefin
     case "addressCountry":
       raw = profile.contact.address.country;
       break;
+    case "fullAddress":
+      raw = fullAddress(profile.contact.address.street, profile.contact.address.city, profile.contact.address.state, profile.contact.address.zip, profile.contact.address.country);
+      break;
     case "school":
       raw = education?.school;
       break;
@@ -170,6 +176,9 @@ function resolveValue(field: CanonicalField, profile: Profile): string | undefin
     case "educationEndDate":
       raw = education?.endDate;
       break;
+    case "graduationMonthYear":
+      raw = education?.endDate ? monthYearFromDate(education.endDate, "MM/YYYY") : undefined;
+      break;
     case "employer":
       raw = workHistory?.employer;
       break;
@@ -179,11 +188,17 @@ function resolveValue(field: CanonicalField, profile: Profile): string | undefin
     case "workStartDate":
       raw = workHistory?.startDate;
       break;
+    case "workStartMonthYear":
+      raw = workHistory?.startDate ? monthYearFromDate(workHistory.startDate, "MM/YYYY") : undefined;
+      break;
     case "workEndDate":
       raw = workHistory?.endDate;
       break;
     case "workDescription":
       raw = workHistory?.description;
+      break;
+    case "yearsOfExperience":
+      raw = yearsOfExperience(profile.workHistory);
       break;
   }
 

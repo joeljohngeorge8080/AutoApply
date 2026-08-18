@@ -1,16 +1,16 @@
 # Graph Report - AutoApply  (2026-08-23)
 
 ## Corpus Check
-- 47 files · ~24,547 words
+- 47 files · ~25,394 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 306 nodes · 335 edges · 36 communities (27 shown, 9 thin omitted)
+- 311 nodes · 374 edges · 34 communities (26 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `157e0b75`
+- Built from commit: `e03577ed`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -43,7 +43,6 @@
 - .mcp.json
 - README.md
 - vite.config.ts
-- dictionary.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 14 edges
@@ -51,31 +50,31 @@
 3. `Codex-Build — Codex Types, Claude Verifies` - 11 edges
 4. `/graphify` - 10 edges
 5. `ACT 2 — REVIEW (Claude ↔ Codex)` - 9 edges
-6. `renderListView()` - 8 edges
-7. `graphify reference: extra exports and benchmark` - 8 edges
-8. `During the session` - 8 edges
-9. `ACT 2 — REVIEW (Claude ↔ Codex)` - 8 edges
-10. `Grill-with-Docs-Codex — Grill Against Your Domain, Then Get Reviewed` - 7 edges
+6. `resolveValue()` - 8 edges
+7. `renderListView()` - 8 edges
+8. `graphify reference: extra exports and benchmark` - 8 edges
+9. `During the session` - 8 edges
+10. `ACT 2 — REVIEW (Claude ↔ Codex)` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `matchFields()`  [EXTRACTED]
   src/content/fill.ts → src/lib/matching/match.ts
-- `refreshProfiles()` --calls--> `listProfiles()`  [EXTRACTED]
-  src/popup/popup.ts → src/lib/storage/storage.ts
-- `handleFill()` --calls--> `getProfile()`  [EXTRACTED]
-  src/popup/popup.ts → src/lib/storage/storage.ts
-- `renderListView()` --calls--> `getProfile()`  [EXTRACTED]
-  src/popup/popup.ts → src/lib/storage/storage.ts
-- `handleSave()` --calls--> `saveProfile()`  [EXTRACTED]
-  src/popup/popup.ts → src/lib/storage/storage.ts
+- `FieldMatch` --references--> `CanonicalField`  [EXTRACTED]
+  src/lib/matching/match.ts → src/lib/matching/dictionary.ts
+- `resolveValue()` --calls--> `ageFromDob()`  [EXTRACTED]
+  src/lib/matching/match.ts → src/lib/matching/transforms.ts
+- `resolveValue()` --calls--> `fullAddress()`  [EXTRACTED]
+  src/lib/matching/match.ts → src/lib/matching/transforms.ts
+- `resolveValue()` --calls--> `fullNameFromParts()`  [EXTRACTED]
+  src/lib/matching/match.ts → src/lib/matching/transforms.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (36 total, 9 thin omitted)
+## Communities (34 total, 8 thin omitted)
 
 ### Community 0 - "AutoApply — Design Spec"
-Cohesion: 0.17
+Cohesion: 0.15
 Nodes (23): SAMPLE_PROFILE, deleteProfile(), getProfile(), listProfiles(), readProfiles(), saveProfile(), FakeChromeStorage, writeProfiles() (+15 more)
 
 ### Community 1 - "Wiki Index"
@@ -87,8 +86,8 @@ Cohesion: 0.08
 Nodes (23): chrome, DOM, ES2020, src, vite.config.ts, vite.content.config.ts, vitest.config.ts, vitest/globals (+15 more)
 
 ### Community 3 - "Log"
-Cohesion: 0.16
-Nodes (20): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+12 more)
+Cohesion: 0.17
+Nodes (23): CanonicalField, DICTIONARY, classifyField(), EXACT_INDEX, FieldMatch, FieldSignal, FUZZY_ENTRIES, MatchConfidence (+15 more)
 
 ### Community 4 - "_index.md"
 Cohesion: 0.09
@@ -123,8 +122,8 @@ Cohesion: 0.18
 Nodes (10): 1. Load Extension into Chrome, 2. Create a Test Profile, 3. Test on a Real Application Form, 4. Verify Behavior, 5. Edge Cases to Test, AutoApply E2E Testing Plan, Known Limitations, Status (+2 more)
 
 ### Community 12 - "fill.ts"
-Cohesion: 0.48
-Nodes (5): ageFromDob(), DateFormat, dateReformat(), fullNameFromParts(), parseKnownDateFormat()
+Cohesion: 0.40
+Nodes (9): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+1 more)
 
 ### Community 13 - "Obsidian Vault"
 Cohesion: 0.20
@@ -155,19 +154,19 @@ Cohesion: 0.50
 Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphify reference: incremental update and cluster-only
 
 ## Knowledge Gaps
-- **181 isolated node(s):** `MatchConfidence`, `FieldMatch`, `FUZZY_ENTRIES`, `SIGNAL_PRIORITY`, `supabase` (+176 more)
+- **177 isolated node(s):** `supabase`, `name`, `version`, `private`, `type` (+172 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `Profile` connect `AutoApply — Design Spec` to `Log`, `fill.ts`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Why does `Grill-with-Docs-Codex — Grill Against Your Domain, Then Get Reviewed` connect `_index.md` to `ADR Format`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `Profile` connect `AutoApply — Design Spec` to `Log`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **What connects `MatchConfidence`, `FieldMatch`, `FUZZY_ENTRIES` to the rest of the system?**
-  _181 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `supabase`, `name`, `version` to the rest of the system?**
+  _177 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Wiki Index` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Recent Context` be split into smaller, more focused modules?**

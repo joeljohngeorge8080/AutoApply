@@ -110,6 +110,48 @@ describe("matchField — fuzzy matches", () => {
   });
 });
 
+describe("matchField — derived fields", () => {
+  it("matches 'initials' and derives from first and last name", () => {
+    const signal: FieldSignal = { index: 13, label: "initials" };
+    const result = matchField(signal, SAMPLE_PROFILE);
+    expect(result?.canonicalField).toBe("initials");
+    expect(result?.confidence).toBe("exact");
+    expect(result?.value).toBe("AL");
+  });
+
+  it("matches 'years of experience' and derives from work history", () => {
+    const signal: FieldSignal = { index: 14, label: "years of experience" };
+    const result = matchField(signal, SAMPLE_PROFILE);
+    expect(result?.canonicalField).toBe("yearsOfExperience");
+    expect(result?.confidence).toBe("exact");
+    expect(result?.value).toBe("13");
+  });
+
+  it("matches 'full address' and derives from address fields", () => {
+    const signal: FieldSignal = { index: 15, label: "full address" };
+    const result = matchField(signal, SAMPLE_PROFILE);
+    expect(result?.canonicalField).toBe("fullAddress");
+    expect(result?.confidence).toBe("exact");
+    expect(result?.value).toBe("1 Analytical Engine Way, London, LDN SW1A 1AA, UK");
+  });
+
+  it("matches 'graduation month year' and derives from education end date", () => {
+    const signal: FieldSignal = { index: 16, label: "graduation month year" };
+    const result = matchField(signal, SAMPLE_PROFILE);
+    expect(result?.canonicalField).toBe("graduationMonthYear");
+    expect(result?.confidence).toBe("exact");
+    expect(result?.value).toBe("06/2012");
+  });
+
+  it("matches 'employment month year' and derives from work start date", () => {
+    const signal: FieldSignal = { index: 17, placeholder: "employment month year" };
+    const result = matchField(signal, SAMPLE_PROFILE);
+    expect(result?.canonicalField).toBe("workStartMonthYear");
+    expect(result?.confidence).toBe("exact");
+    expect(result?.value).toBe("01/2013");
+  });
+});
+
 describe("matchField — skip behavior", () => {
   it("skips a field that matches a canonical field but has no unmatched dictionary variant", () => {
     const signal: FieldSignal = { index: 5, label: "Favorite Color" };
