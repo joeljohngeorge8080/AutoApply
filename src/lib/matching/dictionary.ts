@@ -41,15 +41,15 @@ export type CanonicalField =
  * readability; matching does not depend on order.
  */
 export const DICTIONARY: Record<CanonicalField, string[]> = {
-  firstName: ["first name", "firstname", "given name", "forename", "your first name", "applicant first name", "first"],
-  lastName: ["last name", "lastname", "surname", "family name", "your last name", "applicant last name", "last"],
-  fullName: ["full name", "fullname", "applicant name", "your name", "full legal name", "complete name"],
+  firstName: ["first name", "firstname", "given name", "forename", "your first name", "first"],
+  lastName: ["last name", "lastname", "surname", "family name", "your last name", "last"],
+  fullName: ["full name", "fullname", "your name", "complete name"],
   initials: ["initials", "first and last initials", "name initials", "your initials"],
-  dateOfBirth: ["date of birth", "dateofbirth", "dob", "birth date", "birthdate", "date of birth", "when were you born"],
+  dateOfBirth: ["date of birth", "dateofbirth", "dob", "birth date", "birthdate"],
   age: ["age", "your age"],
   gender: ["gender", "sex", "select gender", "what is your gender"],
   email: ["email", "email address", "e mail", "contact email", "primary email", "work email", "your email"],
-  phone: ["phone", "phone number", "telephone", "mobile", "mobile number", "cell", "cell number", "contact phone", "best phone", "primary phone", "phone"],
+  phone: ["phone", "phone number", "telephone", "mobile", "cell", "contact phone", "best phone", "primary phone"],
   addressStreet: ["street", "street address", "address line 1", "address 1", "address", "street address", "address line 2", "apartment", "suite"],
   addressCity: ["city", "town", "city name"],
   addressState: ["state", "province", "region", "state province"],
