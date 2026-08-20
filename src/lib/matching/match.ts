@@ -55,7 +55,21 @@ const SIGNAL_PRIORITY: Array<keyof Omit<FieldSignal, "index">> = [
   "ariaLabel",
 ];
 
+// Matching result cache: keyed by signal properties, scoped to current profile
+let classificationCache: Map<string, ReturnType<typeof classifyField>> | undefined;
+
+function getCacheKey(signal: FieldSignal): string {
+  return [signal.label, signal.placeholder, signal.name, signal.id, signal.ariaLabel].filter(Boolean).join("|");
+}
+
 function classifyField(signal: FieldSignal): { field: CanonicalField; confidence: MatchConfidence } | undefined {
+  // Check cache if available
+  if (classificationCache) {
+    const key = getCacheKey(signal);
+    if (classificationCache.has(key)) {
+      return classificationCache.get(key);
+    }
+  }
   // Exact tier: try each signal text in priority order, first unambiguous
   // exact match wins.
   for (const key of SIGNAL_PRIORITY) {
@@ -65,7 +79,12 @@ function classifyField(signal: FieldSignal): { field: CanonicalField; confidence
     if (!norm) continue;
     const exactFields = EXACT_INDEX.get(norm);
     if (exactFields && exactFields.length === 1) {
-      return { field: exactFields[0], confidence: "exact" };
+      const result = { field: exactFields[0], confidence: "exact" as const };
+      if (classificationCache) {
+        const key = getCacheKey(signal);
+        classificationCache.set(key, result);
+      }
+      return result;
     }
   }
 
@@ -104,7 +123,15 @@ function classifyField(signal: FieldSignal): { field: CanonicalField; confidence
     return undefined; // ambiguous — a missed fill beats a wrong one
   }
 
-  return { field: best.entry.field, confidence: "fuzzy" };
+  const result = { field: best.entry.field, confidence: "fuzzy" as const };
+
+  // Store in cache if available
+  if (classificationCache) {
+    const key = getCacheKey(signal);
+    classificationCache.set(key, result);
+  }
+
+  return result;
 }
 
 function resolveValue(field: CanonicalField, profile: Profile): string | undefined {
@@ -224,10 +251,17 @@ export function matchField(signal: FieldSignal, profile: Profile): FieldMatch | 
 
 /** Matches a batch of field signals against a profile, skipping non-matches. */
 export function matchFields(signals: FieldSignal[], profile: Profile): FieldMatch[] {
+  // Initialize cache for this batch
+  classificationCache = new Map();
+
   const matches: FieldMatch[] = [];
   for (const signal of signals) {
     const match = matchField(signal, profile);
     if (match) matches.push(match);
   }
+
+  // Clear cache after batch completes
+  classificationCache = undefined;
+
   return matches;
 }

@@ -1,0 +1,12 @@
+.env
+node_modules/
+dist/
+
+# Docs / notes / non-runtime content
+CLAUDE.md
+docs/
+wiki/
+.obsidian/
+.raw/
+_templates/
+skills-lock.json

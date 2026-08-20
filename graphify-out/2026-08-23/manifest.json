@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "src/lib/matching/dictionary.ts": {
-    "mtime": 1787491045.6455016,
-    "ast_hash": "c0499a3e0a1fc29b5fff802be0f99cd2",
+    "mtime": 1787491508.1481755,
+    "ast_hash": "eb0bd121ffc67f0a5dd4cd98a6db2b4e",
     "semantic_hash": ""
   },
   "src/lib/matching/fixtures.ts": {
@@ -190,23 +190,23 @@
     "semantic_hash": ""
   },
   "src/lib/matching/match.test.ts": {
-    "mtime": 1787491125.2616506,
-    "ast_hash": "836ecd0424457e27b3c1c0bfceb72157",
+    "mtime": 1787491587.7143238,
+    "ast_hash": "0bcebcc258d04d0b1bbf2d6cf785e9a6",
     "semantic_hash": ""
   },
   "src/lib/matching/match.ts": {
-    "mtime": 1787491058.1966827,
-    "ast_hash": "7764c6522b8f1b7a8b9b8d8c54c9cb42",
+    "mtime": 1787491530.6184998,
+    "ast_hash": "fff3e08b20a3b13c487f36a16ff03377",
     "semantic_hash": ""
   },
   "src/lib/matching/transforms.test.ts": {
-    "mtime": 1784452437.7787106,
-    "ast_hash": "bce993a233f7a4fe04365b15af215db5",
+    "mtime": 1787491552.1408103,
+    "ast_hash": "17a54806fbe68e1a161c734da833c5a3",
     "semantic_hash": ""
   },
   "src/lib/matching/transforms.ts": {
-    "mtime": 1784452429.7105691,
-    "ast_hash": "d9917f700777d3c2692e8fba61d8e91c",
+    "mtime": 1787491485.2138445,
+    "ast_hash": "08dc965a6d8dedf0747a4b549c7826d2",
     "semantic_hash": ""
   },
   "src/lib/messaging.ts": {
