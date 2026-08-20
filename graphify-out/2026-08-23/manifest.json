@@ -175,8 +175,8 @@
     "semantic_hash": ""
   },
   "src/content/fill.ts": {
-    "mtime": 1784452813.541751,
-    "ast_hash": "174d68fc280dd7d50e40020bae037ba3",
+    "mtime": 1787492347.5822885,
+    "ast_hash": "6f7c8cb168e6ad9e4c3d6a07d89bfed3",
     "semantic_hash": ""
   },
   "src/lib/matching/dictionary.ts": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "src/lib/matching/match.ts": {
-    "mtime": 1787491530.6184998,
-    "ast_hash": "fff3e08b20a3b13c487f36a16ff03377",
+    "mtime": 1787492376.1987014,
+    "ast_hash": "605523a980ddc6e8e95b57e113a89459",
     "semantic_hash": ""
   },
   "src/lib/matching/transforms.test.ts": {

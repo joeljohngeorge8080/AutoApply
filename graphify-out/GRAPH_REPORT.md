@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 312 nodes · 376 edges · 34 communities (26 shown, 8 thin omitted)
+- 312 nodes · 359 edges · 35 communities (26 shown, 9 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0c600a88`
+- Built from commit: `d4755ada`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -43,6 +43,7 @@
 - .mcp.json
 - README.md
 - vite.config.ts
+- dictionary.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 14 edges
@@ -50,28 +51,28 @@
 3. `Codex-Build — Codex Types, Claude Verifies` - 11 edges
 4. `/graphify` - 10 edges
 5. `ACT 2 — REVIEW (Claude ↔ Codex)` - 9 edges
-6. `resolveValue()` - 8 edges
-7. `renderListView()` - 8 edges
-8. `graphify reference: extra exports and benchmark` - 8 edges
-9. `During the session` - 8 edges
-10. `ACT 2 — REVIEW (Claude ↔ Codex)` - 8 edges
+6. `graphify reference: extra exports and benchmark` - 8 edges
+7. `During the session` - 8 edges
+8. `ACT 2 — REVIEW (Claude ↔ Codex)` - 8 edges
+9. `renderListView()` - 8 edges
+10. `Grill-with-Docs-Codex — Grill Against Your Domain, Then Get Reviewed` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `matchFields()`  [EXTRACTED]
   src/content/fill.ts → src/lib/matching/match.ts
-- `FieldMatch` --references--> `CanonicalField`  [EXTRACTED]
-  src/lib/matching/match.ts → src/lib/matching/dictionary.ts
-- `resolveValue()` --calls--> `ageFromDob()`  [EXTRACTED]
-  src/lib/matching/match.ts → src/lib/matching/transforms.ts
-- `resolveValue()` --calls--> `fullAddress()`  [EXTRACTED]
-  src/lib/matching/match.ts → src/lib/matching/transforms.ts
-- `resolveValue()` --calls--> `fullNameFromParts()`  [EXTRACTED]
-  src/lib/matching/match.ts → src/lib/matching/transforms.ts
+- `refreshProfiles()` --calls--> `listProfiles()`  [EXTRACTED]
+  src/popup/popup.ts → src/lib/storage/storage.ts
+- `handleFill()` --calls--> `getProfile()`  [EXTRACTED]
+  src/popup/popup.ts → src/lib/storage/storage.ts
+- `renderListView()` --calls--> `getProfile()`  [EXTRACTED]
+  src/popup/popup.ts → src/lib/storage/storage.ts
+- `handleSave()` --calls--> `saveProfile()`  [EXTRACTED]
+  src/popup/popup.ts → src/lib/storage/storage.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (34 total, 8 thin omitted)
+## Communities (35 total, 9 thin omitted)
 
 ### Community 0 - "AutoApply — Design Spec"
 Cohesion: 0.18
@@ -86,8 +87,8 @@ Cohesion: 0.08
 Nodes (23): chrome, DOM, ES2020, src, vite.config.ts, vite.content.config.ts, vitest.config.ts, vitest/globals (+15 more)
 
 ### Community 3 - "Log"
-Cohesion: 0.15
-Nodes (25): CanonicalField, DICTIONARY, SAMPLE_PROFILE, classifyField(), EXACT_INDEX, FieldMatch, FieldSignal, FUZZY_ENTRIES (+17 more)
+Cohesion: 0.14
+Nodes (22): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+14 more)
 
 ### Community 4 - "_index.md"
 Cohesion: 0.09
@@ -122,8 +123,8 @@ Cohesion: 0.18
 Nodes (10): 1. Load Extension into Chrome, 2. Create a Test Profile, 3. Test on a Real Application Form, 4. Verify Behavior, 5. Edge Cases to Test, AutoApply E2E Testing Plan, Known Limitations, Status (+2 more)
 
 ### Community 12 - "fill.ts"
-Cohesion: 0.35
-Nodes (9): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+1 more)
+Cohesion: 0.33
+Nodes (10): ageFromDob(), DateFormat, dateReformat(), fullAddress(), fullNameFromParts(), getMonthName(), initialsFromName(), monthYearFromDate() (+2 more)
 
 ### Community 13 - "Obsidian Vault"
 Cohesion: 0.20
@@ -154,24 +155,24 @@ Cohesion: 0.50
 Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphify reference: incremental update and cluster-only
 
 ## Knowledge Gaps
-- **177 isolated node(s):** `supabase`, `name`, `version`, `private`, `type` (+172 more)
+- **180 isolated node(s):** `1. Pin the fixed point`, `2. Identify the spec source`, `3. Identify the standards sources`, `4. Spawn both sub-agents in parallel`, `5. Aggregate` (+175 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Profile` connect `AutoApply — Design Spec` to `Log`, `fill.ts`?**
+- **Why does `Profile` connect `AutoApply — Design Spec` to `Log`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Why does `Grill-with-Docs-Codex — Grill Against Your Domain, Then Get Reviewed` connect `_index.md` to `ADR Format`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **What connects `supabase`, `name`, `version` to the rest of the system?**
-  _177 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `1. Pin the fixed point`, `2. Identify the spec source`, `3. Identify the standards sources` to the rest of the system?**
+  _180 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Wiki Index` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Recent Context` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Log` be split into smaller, more focused modules?**
-  _Cohesion score 0.14623655913978495 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1396011396011396 - nodes in this community are weakly interconnected._
 - **Should `_index.md` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._

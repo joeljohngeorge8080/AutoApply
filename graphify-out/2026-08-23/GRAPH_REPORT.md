@@ -1,16 +1,16 @@
 # Graph Report - AutoApply  (2026-08-23)
 
 ## Corpus Check
-- 47 files · ~25,394 words
+- 47 files · ~25,611 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 311 nodes · 374 edges · 34 communities (26 shown, 8 thin omitted)
+- 312 nodes · 376 edges · 34 communities (26 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e03577ed`
+- Built from commit: `0c600a88`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -74,8 +74,8 @@
 ## Communities (34 total, 8 thin omitted)
 
 ### Community 0 - "AutoApply — Design Spec"
-Cohesion: 0.15
-Nodes (23): SAMPLE_PROFILE, deleteProfile(), getProfile(), listProfiles(), readProfiles(), saveProfile(), FakeChromeStorage, writeProfiles() (+15 more)
+Cohesion: 0.18
+Nodes (22): deleteProfile(), getProfile(), listProfiles(), readProfiles(), saveProfile(), FakeChromeStorage, writeProfiles(), Profile (+14 more)
 
 ### Community 1 - "Wiki Index"
 Cohesion: 0.08
@@ -86,8 +86,8 @@ Cohesion: 0.08
 Nodes (23): chrome, DOM, ES2020, src, vite.config.ts, vite.content.config.ts, vitest.config.ts, vitest/globals (+15 more)
 
 ### Community 3 - "Log"
-Cohesion: 0.17
-Nodes (23): CanonicalField, DICTIONARY, classifyField(), EXACT_INDEX, FieldMatch, FieldSignal, FUZZY_ENTRIES, MatchConfidence (+15 more)
+Cohesion: 0.15
+Nodes (25): CanonicalField, DICTIONARY, SAMPLE_PROFILE, classifyField(), EXACT_INDEX, FieldMatch, FieldSignal, FUZZY_ENTRIES (+17 more)
 
 ### Community 4 - "_index.md"
 Cohesion: 0.09
@@ -122,7 +122,7 @@ Cohesion: 0.18
 Nodes (10): 1. Load Extension into Chrome, 2. Create a Test Profile, 3. Test on a Real Application Form, 4. Verify Behavior, 5. Edge Cases to Test, AutoApply E2E Testing Plan, Known Limitations, Status (+2 more)
 
 ### Community 12 - "fill.ts"
-Cohesion: 0.40
+Cohesion: 0.35
 Nodes (9): applyValue(), extractSignals(), Fillable, FillResult, isFillable(), labelTextFor(), NON_FILLABLE_INPUT_TYPES, run() (+1 more)
 
 ### Community 13 - "Obsidian Vault"
@@ -171,7 +171,7 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Recent Context` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Log` be split into smaller, more focused modules?**
+  _Cohesion score 0.14623655913978495 - nodes in this community are weakly interconnected._
 - **Should `_index.md` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
-- **Should `_index.md` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
