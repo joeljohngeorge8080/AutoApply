@@ -1,8 +1,10 @@
 import { matchFields, type FieldSignal } from "../lib/matching/match";
 import { FILL_REQUEST_KEY } from "../lib/messaging";
 import type { Profile } from "../lib/storage/types";
+import { detectForms, getFormStats } from "../lib/form/detect";
+import { highlightFields, clearHighlights } from "../lib/form/highlight";
 
-type Fillable = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+export type Fillable = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 interface FillResult {
   filled: number;
@@ -89,9 +91,21 @@ function applyValue(el: Fillable, value: string): void {
 async function run(): Promise<FillResult> {
   const stored = await chrome.storage.local.get(FILL_REQUEST_KEY);
   const profile = stored[FILL_REQUEST_KEY] as Profile | undefined;
+  const highlightRequest = stored["HIGHLIGHT_FIELDS_KEY"] as boolean | undefined;
   await chrome.storage.local.remove(FILL_REQUEST_KEY);
+  await chrome.storage.local.remove("HIGHLIGHT_FIELDS_KEY");
+
+  if (highlightRequest) {
+    const forms = detectForms();
+    const allFields = forms.flatMap((f) => f.elements);
+    highlightFields(allFields);
+    return { filled: 0, skipped: 0 };
+  }
 
   if (!profile) return { filled: 0, skipped: 0 };
+
+  // Clear highlights before filling
+  clearHighlights();
 
   const { elements, signals } = extractSignals();
   const matches = matchFields(signals, profile);
@@ -112,5 +126,10 @@ async function run(): Promise<FillResult> {
 
   return { filled, skipped: signals.length - filled };
 }
+
+// On page load: detect forms and store stats
+chrome.storage.local.set({ FORM_DETECTION_STATS: getFormStats() }).catch(() => {
+  // Storage error; silently continue
+});
 
 run();

@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "src/lib/matching/dictionary.ts": {
-    "mtime": 1787491508.1481755,
-    "ast_hash": "eb0bd121ffc67f0a5dd4cd98a6db2b4e",
+    "mtime": 1787492458.9618957,
+    "ast_hash": "8e53531e00a541f0261622e4f5f797d0",
     "semantic_hash": ""
   },
   "src/lib/matching/fixtures.ts": {

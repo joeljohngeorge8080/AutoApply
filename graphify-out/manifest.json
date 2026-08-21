@@ -175,8 +175,8 @@
     "semantic_hash": ""
   },
   "src/content/fill.ts": {
-    "mtime": 1787492347.5822885,
-    "ast_hash": "6f7c8cb168e6ad9e4c3d6a07d89bfed3",
+    "mtime": 1787492797.2627773,
+    "ast_hash": "8ab89dfdeb4ce76a8c5462eedfcd0740",
     "semantic_hash": ""
   },
   "src/lib/matching/dictionary.ts": {
@@ -250,7 +250,7 @@
     "semantic_hash": ""
   },
   "vitest.config.ts": {
-    "mtime": 1784452300.0323126,
+    "mtime": 1787492942.2268693,
     "ast_hash": "6e816c65ddf2f7f9d1c4c1db1252e651",
     "semantic_hash": ""
   },
@@ -277,6 +277,21 @@
   "public/icons/icon48.png": {
     "mtime": 1784452325.49071,
     "ast_hash": "a678c8d5f406951c8a81a9a93659ca51",
+    "semantic_hash": ""
+  },
+  "src/lib/form/detect.ts": {
+    "mtime": 1787492839.092381,
+    "ast_hash": "781cae7743d3ab33dae5bda7585ec4a7",
+    "semantic_hash": ""
+  },
+  "src/lib/form/highlight.ts": {
+    "mtime": 1787492820.3661108,
+    "ast_hash": "b8c171382f43acd11a17e24c82705641",
+    "semantic_hash": ""
+  },
+  "src/lib/matching/performance.test.ts": {
+    "mtime": 1787492531.5969439,
+    "ast_hash": "d3ad7f21041d6e4ea1f38d9fd68e75b6",
     "semantic_hash": ""
   }
 }
