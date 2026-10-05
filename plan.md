@@ -2,7 +2,7 @@
 
 ## Status
 - ✅ Build complete: npm run build
-- ✅ Unit tests: 22/22 passing
+- ✅ Unit tests: 60 passing
 - ⏳ Next: Manual end-to-end testing in Chrome
 
 ## Steps to Test AutoApply Extension
@@ -42,10 +42,10 @@
 
 ### 5. Edge Cases to Test
 - Multi-step forms: Does the extension fill step 1 correctly?
-- Dropdown/select fields: Are select options being populated?
+- Dropdown/select fields: matched by option value/text; ambiguous or unknown values are skipped
 - Hidden fields: Are they being skipped correctly?
 - Duplicate field labels: Are matches correct or ambiguous?
-- Pre-filled fields: Does the extension overwrite them?
+
 
 ## Known Limitations
 - Extension only works on pages where fields have accessible name/id/placeholder attributes

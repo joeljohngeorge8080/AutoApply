@@ -1,4 +1,4 @@
-import { FILL_REQUEST_KEY } from "../lib/messaging";
+import { FILL_REQUEST_KEY, HIGHLIGHT_REQUEST_KEY, RESULT_GLOBAL } from "../lib/messaging";
 import { deleteProfile, getProfile, listProfiles, saveProfile } from "../lib/storage/storage";
 import type { Profile } from "../lib/storage/types";
 
@@ -80,6 +80,7 @@ function renderListView(): void {
             <select id="fill-select">${options}</select>
           </div>
           <button class="primary" id="fill-button">Fill this page</button>
+          <button id="highlight-button">Highlight fields</button>
         `
     }
     ${statusMessage ? `<div class="status ${statusMessage.empty ? "empty" : ""}">${escapeHtml(statusMessage.text)}</div>` : ""}
@@ -96,6 +97,10 @@ function renderListView(): void {
 
   document.getElementById("fill-button")?.addEventListener("click", () => {
     void handleFill();
+  });
+
+  document.getElementById("highlight-button")?.addEventListener("click", () => {
+    void handleHighlight();
   });
 
   document.getElementById("new-profile-button")?.addEventListener("click", () => {
@@ -235,13 +240,29 @@ async function handleSave(id: string): Promise<void> {
   render();
 }
 
+async function runContentScript(tabId: number): Promise<FillResult | undefined> {
+  await chrome.scripting.executeScript({ target: { tabId }, files: ["content.js"] });
+  // The IIFE bundle has no completion value; read the promise it parked on a global.
+  const [read] = await chrome.scripting.executeScript({
+    target: { tabId },
+    func: (key: string) => (globalThis as unknown as Record<string, Promise<unknown>>)[key],
+    args: [RESULT_GLOBAL],
+  });
+  return read?.result as FillResult | undefined;
+}
+
+async function activeTabId(): Promise<number | undefined> {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  return tab?.id;
+}
+
 async function handleFill(): Promise<void> {
   if (!selectedFillId) return;
   const profile = await getProfile(selectedFillId);
   if (!profile) return;
 
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab?.id) {
+  const tabId = await activeTabId();
+  if (tabId === undefined) {
     statusMessage = { text: "No active tab found.", empty: true };
     render();
     return;
@@ -250,11 +271,7 @@ async function handleFill(): Promise<void> {
   await chrome.storage.local.set({ [FILL_REQUEST_KEY]: profile });
 
   try {
-    const results = await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ["content.js"],
-    });
-    const result = results[0]?.result as FillResult | undefined;
+    const result = await runContentScript(tabId);
 
     if (!result || (result.filled === 0 && result.skipped === 0)) {
       statusMessage = { text: "No fillable fields found.", empty: true };
@@ -263,6 +280,32 @@ async function handleFill(): Promise<void> {
     }
   } catch {
     statusMessage = { text: "Could not fill this page (unsupported or restricted page).", empty: true };
+  } finally {
+    // Don't leave profile data sitting in storage if injection failed.
+    await chrome.storage.local.remove(FILL_REQUEST_KEY);
+  }
+
+  render();
+}
+
+async function handleHighlight(): Promise<void> {
+  const tabId = await activeTabId();
+  if (tabId === undefined) {
+    statusMessage = { text: "No active tab found.", empty: true };
+    render();
+    return;
+  }
+
+  await chrome.storage.local.set({ [HIGHLIGHT_REQUEST_KEY]: true });
+
+  try {
+    const result = await runContentScript(tabId);
+    const count = result?.skipped ?? 0;
+    statusMessage = { text: count > 0 ? `Highlighted ${count} fields.` : "No fillable fields found.", empty: count === 0 };
+  } catch {
+    statusMessage = { text: "Could not scan this page (unsupported or restricted page).", empty: true };
+  } finally {
+    await chrome.storage.local.remove(HIGHLIGHT_REQUEST_KEY);
   }
 
   render();
