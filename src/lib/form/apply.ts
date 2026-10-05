@@ -40,6 +40,8 @@ function fire(el: HTMLElement): void {
 /** Returns true only if the field was actually changed. Never overwrites existing user input. */
 export function applyValue(el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, value: string): boolean {
   if (el instanceof HTMLSelectElement) {
+    // Same rule as text fields: respect a choice already made (placeholder options have value "").
+    if (el.value !== "") return false;
     const idx = pickOptionIndex(
       Array.from(el.options).map((o) => ({ value: o.value, text: o.text })),
       value,

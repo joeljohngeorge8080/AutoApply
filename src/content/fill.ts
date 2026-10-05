@@ -85,7 +85,7 @@ async function run(): Promise<FillResult> {
 
   if (highlightRequest) {
     const forms = detectForms();
-    const allFields = forms.flatMap((f) => f.elements);
+    const allFields = forms.flatMap((f) => f.elements).filter((el) => !el.disabled && !el.hidden);
     highlightFields(allFields);
     return { filled: 0, skipped: allFields.length };
   }
