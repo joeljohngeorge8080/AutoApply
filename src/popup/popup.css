@@ -117,3 +117,28 @@ button.danger {
   font-size: 11px;
   color: #666;
 }
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.entry legend {
+  font-size: 12px;
+  color: #444;
+  padding: 0 4px;
+}
+
+.entry-controls {
+  justify-content: flex-end;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

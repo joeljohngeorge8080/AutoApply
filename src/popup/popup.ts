@@ -1,6 +1,10 @@
 import { FILL_REQUEST_KEY, HIGHLIGHT_REQUEST_KEY, RESULT_GLOBAL } from "../lib/messaging";
 import { deleteProfile, getProfile, listProfiles, saveProfile } from "../lib/storage/storage";
+import { move, pruneBlank, removeAt } from "../lib/storage/entries";
 import type { Profile } from "../lib/storage/types";
+
+type Education = Profile["education"][number];
+type Work = Profile["workHistory"][number];
 
 interface FillResult {
   filled: number;
@@ -26,9 +30,17 @@ function emptyProfile(): Profile {
       phone: "",
       address: { street: "", city: "", state: "", zip: "", country: "" },
     },
-    education: [{ school: "", degree: "", fieldOfStudy: "", gpa: "", startDate: "", endDate: "" }],
-    workHistory: [{ employer: "", title: "", startDate: "", endDate: "", description: "" }],
+    education: [emptyEducation()],
+    workHistory: [emptyWork()],
   };
+}
+
+function emptyEducation(): Education {
+  return { school: "", degree: "", fieldOfStudy: "", gpa: "", startDate: "", endDate: "" };
+}
+
+function emptyWork(): Work {
+  return { employer: "", title: "", startDate: "", endDate: "", description: "" };
 }
 
 async function refreshProfiles(): Promise<void> {
@@ -131,9 +143,45 @@ function renderListView(): void {
   });
 }
 
+function entryControls(kind: "edu" | "work", i: number, count: number): string {
+  return `
+    <span class="row entry-controls">
+      <button type="button" data-entry-action="up" data-kind="${kind}" data-index="${i}" ${i === 0 ? "disabled" : ""} aria-label="Move up">↑</button>
+      <button type="button" data-entry-action="down" data-kind="${kind}" data-index="${i}" ${i === count - 1 ? "disabled" : ""} aria-label="Move down">↓</button>
+      <button type="button" class="danger" data-entry-action="remove" data-kind="${kind}" data-index="${i}">Remove</button>
+    </span>`;
+}
+
+function educationBlock(edu: Education, i: number, count: number): string {
+  return `
+    <fieldset class="entry" data-kind="edu" data-index="${i}">
+      <legend>Education ${i + 1}${i === count - 1 && count > 1 ? " (used to fill)" : ""}</legend>
+      <label>School<input data-field="school" value="${escapeHtml(edu.school)}" /></label>
+      <label>Degree<input data-field="degree" value="${escapeHtml(edu.degree)}" /></label>
+      <label>Field of study<input data-field="fieldOfStudy" value="${escapeHtml(edu.fieldOfStudy)}" /></label>
+      <label>GPA<input data-field="gpa" value="${escapeHtml(edu.gpa ?? "")}" /></label>
+      <label>Start date<input data-field="startDate" type="date" value="${escapeHtml(edu.startDate)}" /></label>
+      <label>End date<input data-field="endDate" type="date" value="${escapeHtml(edu.endDate)}" /></label>
+      ${entryControls("edu", i, count)}
+    </fieldset>`;
+}
+
+function workBlock(work: Work, i: number, count: number): string {
+  return `
+    <fieldset class="entry" data-kind="work" data-index="${i}">
+      <legend>Job ${i + 1}${i === count - 1 && count > 1 ? " (used to fill)" : ""}</legend>
+      <label>Employer<input data-field="employer" value="${escapeHtml(work.employer)}" /></label>
+      <label>Title<input data-field="title" value="${escapeHtml(work.title)}" /></label>
+      <label>Start date<input data-field="startDate" type="date" value="${escapeHtml(work.startDate)}" /></label>
+      <label>End date<input data-field="endDate" type="date" value="${escapeHtml(work.endDate)}" /></label>
+      <label>Description<textarea data-field="description" rows="2">${escapeHtml(work.description ?? "")}</textarea></label>
+      ${entryControls("work", i, count)}
+    </fieldset>`;
+}
+
 function renderFormView(profile: Profile): void {
-  const edu = profile.education[0] ?? { school: "", degree: "", fieldOfStudy: "", gpa: "", startDate: "", endDate: "" };
-  const work = profile.workHistory[0] ?? { employer: "", title: "", startDate: "", endDate: "", description: "" };
+  const education = profile.education.length > 0 ? profile.education : [emptyEducation()];
+  const workHistory = profile.workHistory.length > 0 ? profile.workHistory : [emptyWork()];
 
   app.innerHTML = `
     <h1>${profile.name ? "Edit Profile" : "New Profile"}</h1>
@@ -156,19 +204,14 @@ function renderFormView(profile: Profile): void {
       <label>Country<input id="f-country" value="${escapeHtml(profile.contact.address.country)}" /></label>
 
       <h2>Education</h2>
-      <label>School<input id="f-school" value="${escapeHtml(edu.school)}" /></label>
-      <label>Degree<input id="f-degree" value="${escapeHtml(edu.degree)}" /></label>
-      <label>Field of study<input id="f-fieldOfStudy" value="${escapeHtml(edu.fieldOfStudy)}" /></label>
-      <label>GPA<input id="f-gpa" value="${escapeHtml(edu.gpa ?? "")}" /></label>
-      <label>Start date<input id="f-eduStart" type="date" value="${escapeHtml(edu.startDate)}" /></label>
-      <label>End date<input id="f-eduEnd" type="date" value="${escapeHtml(edu.endDate)}" /></label>
+      <p class="hint">Forms are filled from the last entry.</p>
+      ${education.map((e, i) => educationBlock(e, i, education.length)).join("")}
+      <button type="button" id="add-education">+ Add education</button>
 
       <h2>Work History</h2>
-      <label>Employer<input id="f-employer" value="${escapeHtml(work.employer)}" /></label>
-      <label>Title<input id="f-title" value="${escapeHtml(work.title)}" /></label>
-      <label>Start date<input id="f-workStart" type="date" value="${escapeHtml(work.startDate)}" /></label>
-      <label>End date<input id="f-workEnd" type="date" value="${escapeHtml(work.endDate)}" /></label>
-      <label>Description<textarea id="f-description" rows="2">${escapeHtml(work.description ?? "")}</textarea></label>
+      <p class="hint">Forms are filled from the last entry.</p>
+      ${workHistory.map((w, i) => workBlock(w, i, workHistory.length)).join("")}
+      <button type="button" id="add-work">+ Add job</button>
 
       <div class="form-actions">
         <button id="cancel-button">Cancel</button>
@@ -185,14 +228,65 @@ function renderFormView(profile: Profile): void {
   document.getElementById("save-button")?.addEventListener("click", () => {
     void handleSave(profile.id);
   });
+
+  // Snapshot typed-but-unsaved input before restructuring the lists, so edits survive the re-render.
+  const restructure = (change: (p: Profile) => Profile): void => {
+    view = { kind: "form", profile: change(collectProfile(profile.id)) };
+    render();
+  };
+
+  document.getElementById("add-education")?.addEventListener("click", () => {
+    restructure((p) => ({ ...p, education: [...p.education, emptyEducation()] }));
+  });
+  document.getElementById("add-work")?.addEventListener("click", () => {
+    restructure((p) => ({ ...p, workHistory: [...p.workHistory, emptyWork()] }));
+  });
+
+  app.querySelectorAll<HTMLButtonElement>("[data-entry-action]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const action = btn.dataset.entryAction;
+      const kind = btn.dataset.kind;
+      const index = Number(btn.dataset.index);
+      const apply = <T>(list: T[]): T[] =>
+        action === "remove" ? removeAt(list, index) : move(list, index, action === "up" ? -1 : 1);
+      restructure((p) =>
+        kind === "edu" ? { ...p, education: apply(p.education) } : { ...p, workHistory: apply(p.workHistory) },
+      );
+    });
+  });
 }
 
 function val(id: string): string {
   return (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null)?.value.trim() ?? "";
 }
 
-async function handleSave(id: string): Promise<void> {
-  const profile: Profile = {
+function entryVal(block: Element, field: string): string {
+  return (block.querySelector(`[data-field="${field}"]`) as HTMLInputElement | HTMLTextAreaElement | null)?.value.trim() ?? "";
+}
+
+/** Reads the whole form back into a Profile, blank entries included. */
+function collectProfile(id: string): Profile {
+  const education = Array.from(app.querySelectorAll(".entry[data-kind='edu']")).map(
+    (b): Education => ({
+      school: entryVal(b, "school"),
+      degree: entryVal(b, "degree"),
+      fieldOfStudy: entryVal(b, "fieldOfStudy"),
+      gpa: entryVal(b, "gpa") || undefined,
+      startDate: entryVal(b, "startDate"),
+      endDate: entryVal(b, "endDate"),
+    }),
+  );
+  const workHistory = Array.from(app.querySelectorAll(".entry[data-kind='work']")).map(
+    (b): Work => ({
+      employer: entryVal(b, "employer"),
+      title: entryVal(b, "title"),
+      startDate: entryVal(b, "startDate"),
+      endDate: entryVal(b, "endDate"),
+      description: entryVal(b, "description") || undefined,
+    }),
+  );
+
+  return {
     id,
     name: val("f-name"),
     personal: {
@@ -212,25 +306,18 @@ async function handleSave(id: string): Promise<void> {
         country: val("f-country"),
       },
     },
-    education: [
-      {
-        school: val("f-school"),
-        degree: val("f-degree"),
-        fieldOfStudy: val("f-fieldOfStudy"),
-        gpa: val("f-gpa") || undefined,
-        startDate: val("f-eduStart"),
-        endDate: val("f-eduEnd"),
-      },
-    ],
-    workHistory: [
-      {
-        employer: val("f-employer"),
-        title: val("f-title"),
-        startDate: val("f-workStart"),
-        endDate: val("f-workEnd"),
-        description: val("f-description") || undefined,
-      },
-    ],
+    education,
+    workHistory,
+  };
+}
+
+async function handleSave(id: string): Promise<void> {
+  const collected = collectProfile(id);
+  // A blank trailing entry would become the "latest" one and fill nothing.
+  const profile: Profile = {
+    ...collected,
+    education: pruneBlank(collected.education),
+    workHistory: pruneBlank(collected.workHistory),
   };
 
   await saveProfile(profile);
