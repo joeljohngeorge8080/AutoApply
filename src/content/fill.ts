@@ -67,7 +67,8 @@ function extractSignals(): { elements: Fillable[]; signals: FieldSignal[] } {
 
     // One signal per element: sharing signals between look-alike fields would
     // alias their indexes and mis-map fills.
-    const signal: FieldSignal = { index: signals.length, label, placeholder, name, id, ariaLabel };
+    const inputType = el instanceof HTMLInputElement ? el.type : undefined;
+    const signal: FieldSignal = { index: signals.length, label, placeholder, name, id, ariaLabel, inputType };
 
     elements.push(el);
     signals.push(signal);

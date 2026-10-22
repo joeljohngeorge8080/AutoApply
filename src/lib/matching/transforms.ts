@@ -59,6 +59,23 @@ export function yearsOfExperience(workHistory: Array<{ startDate: string }> | un
 
 export type DateFormat = "YYYY-MM-DD" | "MM/DD/YYYY" | "DD/MM/YYYY" | "MM/YYYY" | "MMM YYYY";
 
+/**
+ * Reads a date-format hint (e.g. a "DD/MM/YYYY" placeholder) out of a field's
+ * text signals. Only slash-separated formats are recognized, since those are
+ * the only ones dateReformat can emit; anything else returns undefined.
+ */
+export function detectDateFormat(hints: Array<string | undefined>): DateFormat | undefined {
+  for (const hint of hints) {
+    if (!hint) continue;
+    const h = hint.toLowerCase().replace(/\s+/g, "");
+    if (h.includes("dd/mm/yyyy")) return "DD/MM/YYYY";
+    if (h.includes("mm/dd/yyyy")) return "MM/DD/YYYY";
+    if (h.includes("yyyy-mm-dd")) return "YYYY-MM-DD";
+    if (h.includes("mm/yyyy")) return "MM/YYYY";
+  }
+  return undefined;
+}
+
 export function dateReformat(input: string, targetFormat: DateFormat): string | undefined {
   const parts = parseKnownDateFormat(input);
   if (!parts) return undefined;

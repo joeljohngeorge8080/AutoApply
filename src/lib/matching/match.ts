@@ -1,6 +1,6 @@
 import type { Profile } from "../storage/types";
 import { DICTIONARY, type CanonicalField } from "./dictionary";
-import { ageFromDob, fullNameFromParts, initialsFromName, yearsOfExperience, fullAddress, monthYearFromDate } from "./transforms";
+import { ageFromDob, fullNameFromParts, initialsFromName, yearsOfExperience, fullAddress, monthYearFromDate, dateReformat, detectDateFormat } from "./transforms";
 
 /** Raw text signals extracted for one form field, before normalization. */
 export interface FieldSignal {
@@ -10,7 +10,17 @@ export interface FieldSignal {
   name?: string;
   id?: string;
   ariaLabel?: string;
+  /** The element's `type` attribute; native type="date" inputs always take ISO. */
+  inputType?: string;
 }
+
+const DATE_FIELDS = new Set<CanonicalField>([
+  "dateOfBirth",
+  "educationStartDate",
+  "educationEndDate",
+  "workStartDate",
+  "workEndDate",
+]);
 
 export type MatchConfidence = "exact" | "fuzzy";
 
@@ -238,8 +248,13 @@ export function matchField(signal: FieldSignal, profile: Profile): FieldMatch | 
   const classified = classifyField(signal);
   if (!classified) return undefined;
 
-  const value = resolveValue(classified.field, profile);
+  let value = resolveValue(classified.field, profile);
   if (value === undefined) return undefined;
+
+  if (DATE_FIELDS.has(classified.field) && signal.inputType !== "date") {
+    const format = detectDateFormat([signal.placeholder, signal.label, signal.ariaLabel]);
+    if (format) value = dateReformat(value, format) ?? value;
+  }
 
   return {
     index: signal.index,

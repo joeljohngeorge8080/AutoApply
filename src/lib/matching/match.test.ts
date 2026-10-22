@@ -181,3 +181,31 @@ describe("matchFields", () => {
     expect(results.map((r) => r.canonicalField)).toEqual(["firstName", "lastName", "email"]);
   });
 });
+
+describe("matchField — date format hints", () => {
+  it("keeps ISO when the field has no format hint", () => {
+    const r = matchField({ index: 0, label: "Date of Birth" }, SAMPLE_PROFILE);
+    expect(r?.value).toBe("1990-06-15");
+  });
+
+  it("reformats to DD/MM/YYYY when the placeholder asks for it", () => {
+    const r = matchField({ index: 0, label: "Date of Birth", placeholder: "DD/MM/YYYY" }, SAMPLE_PROFILE);
+    expect(r?.value).toBe("15/06/1990");
+  });
+
+  it("reformats to MM/DD/YYYY when the placeholder asks for it", () => {
+    const r = matchField({ index: 0, label: "Date of Birth", placeholder: "mm/dd/yyyy" }, SAMPLE_PROFILE);
+    expect(r?.value).toBe("06/15/1990");
+  });
+
+  it("keeps ISO for native type=date inputs even if a hint is present", () => {
+    const r = matchField({ index: 0, label: "Date of Birth", placeholder: "DD/MM/YYYY", inputType: "date" }, SAMPLE_PROFILE);
+    expect(r?.value).toBe("1990-06-15");
+  });
+
+  it("falls back to the raw value when the stored date can't be parsed", () => {
+    const profile = { ...SAMPLE_PROFILE, personal: { ...SAMPLE_PROFILE.personal, dateOfBirth: "June 1990" } };
+    const r = matchField({ index: 0, label: "Date of Birth", placeholder: "DD/MM/YYYY" }, profile);
+    expect(r?.value).toBe("June 1990");
+  });
+});

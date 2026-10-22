@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ageFromDob, dateReformat, fullNameFromParts, initialsFromName, yearsOfExperience, fullAddress, monthYearFromDate } from "./transforms";
+import { ageFromDob, dateReformat, fullNameFromParts, initialsFromName, yearsOfExperience, fullAddress, monthYearFromDate, detectDateFormat } from "./transforms";
 
 describe("ageFromDob", () => {
   it("computes age from a date of birth as of a fixed reference date", () => {
@@ -123,5 +123,23 @@ describe("monthYearFromDate", () => {
 
   it("returns undefined for malformed dates", () => {
     expect(monthYearFromDate("not-a-date", "MM/YYYY")).toBeUndefined();
+  });
+});
+
+describe("detectDateFormat", () => {
+  it("detects DD/MM/YYYY and MM/DD/YYYY hints, case-insensitively", () => {
+    expect(detectDateFormat(["DD/MM/YYYY"])).toBe("DD/MM/YYYY");
+    expect(detectDateFormat(["mm/dd/yyyy"])).toBe("MM/DD/YYYY");
+    expect(detectDateFormat(["Date of birth (dd / mm / yyyy)"])).toBe("DD/MM/YYYY");
+  });
+
+  it("detects ISO and month/year hints", () => {
+    expect(detectDateFormat(["yyyy-mm-dd"])).toBe("YYYY-MM-DD");
+    expect(detectDateFormat(["MM/YYYY"])).toBe("MM/YYYY");
+  });
+
+  it("returns undefined when there is no recognizable hint", () => {
+    expect(detectDateFormat([undefined, "Date of birth", ""])).toBeUndefined();
+    expect(detectDateFormat(["dd.mm.yyyy"])).toBeUndefined();
   });
 });
